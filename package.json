@@ -2,8 +2,9 @@
     "name": "fantom-syntax-highlighting",
     "displayName": "Fantom Syntax Highlighting",
     "description": "Syntax highlighting for the Fantom programming language",
-    "version": "0.0.1",
+    "version": "0.2.1",
     "publisher": "amackayfoss",
+    "repository": "https://github.com/a-mackay/fantom-syntax-highlighting",
     "engines": {
         "vscode": "^1.24.0"
     },
