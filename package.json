@@ -1,0 +1,26 @@
+{
+    "name": "fantom-syntax-highlighting",
+    "displayName": "Fantom Syntax Highlighting",
+    "description": "Syntax highlighting for the Fantom programming language",
+    "version": "0.0.1",
+    "publisher": "amackayfoss",
+    "engines": {
+        "vscode": "^1.24.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "fantom",
+            "aliases": ["Fantom", "fantom"],
+            "extensions": [".fan"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "fantom",
+            "scopeName": "source.fantom",
+            "path": "./syntaxes/fantom.tmLanguage.json"
+        }]
+    }
+}

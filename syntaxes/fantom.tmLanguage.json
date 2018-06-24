@@ -1,0 +1,335 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Fantom",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#support"
+    },
+    {
+      "include": "#core"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "include": "#line_comment"
+        },
+        {
+          "include": "#fandoc"
+        },
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "line_comment": {
+      "patterns": [
+        {
+          "match": "(//).*$\\n?",
+          "name": "comment.line.double-slash.fantom"
+        }
+      ]
+    },
+    "fandoc": {
+      "patterns": [
+        {
+          "match": "^\\s*\\*\\*.*\\n",
+          "name": "comment.block.documentation.fandoc.fantom"
+        }
+      ]
+    },
+    "block_comment": {
+      "patterns": [
+        {
+          "name": "comment.block.nested.fantom",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "patterns": [
+            {
+              "include": "#block_comment"
+            }
+          ]
+        }
+      ]
+    },
+    "support": {
+      "patterns": [
+        {
+          "name": "support.type.builtin.fantom",
+          "match": "\\b(Void|Bool|Int|Float|Decimal|Duration|Str|Uri|Type|Slot|Range|List|Map|This)\\b"
+        }
+      ]
+    },
+    "core": {
+      "patterns": [
+        {
+          "include": "#literal_number"
+        },
+        {
+          "include": "#literal_language_constant"
+        },
+        {
+          "include": "#literal_keywords"
+        },
+        {
+          "include": "#literal_string"
+        },
+        {
+          "include": "#literal_uri"
+        },
+        {
+          "include": "#literal_language_variable"
+        }
+      ]
+    },
+    "literal_number": {
+      "patterns": [
+        {
+          "name": "invalid.illegal.numeric.hex.fantom",
+          "match": "(?i)(?:\\B[-+]\\b)0x_?[0-9a-f_]*\\.(\\B|\\b[0-9]+)"
+        },
+        {
+          "name": "constant.numeric.hex.fantom",
+          "match": "\\b0x[0-9A-Fa-f][_0-9A-Fa-f]*"
+        },
+        {
+          "name": "constant.other.duration.fantom",
+          "match": "(?xi)(\\B\\.[0-9][0-9_]*|\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?)(e[-+]?[0-9][0-9_]*)?(ns|ms|sec|min|hr|day)"
+        },
+        {
+          "name": "constant.numeric.numeric.fantom",
+          "match": "(?xi)(\\B\\.[0-9][0-9_]*|\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?)(e[-+]?[0-9][0-9_]*)?[fd]?"
+        },
+        {
+          "name": "constant.numeric.escape-unicode.fantom",
+          "match": "\\'\\\\u[0-9A-Fa-f]{4}\\'"
+        },
+        {
+          "name": "constant.numeric.escape-char.fantom",
+          "match": "\\'\\\\[bfnrt'\\\\]\\'"
+        },
+        {
+          "name": "constant.numeric.char.fantom",
+          "match": "\\'.\\'"
+        }
+      ]
+    },
+    "literal_language_constant": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.true.fantom",
+          "match": "\\btrue\\b"
+        },
+        {
+          "name": "constant.language.boolean.false.fantom",
+          "match": "\\bfalse\\b"
+        },
+        {
+          "name": "constant.language.null.fantom",
+          "match": "\\bnull\\b"
+        }
+      ]
+    },
+    "literal_keywords": {
+      "patterns": [
+        {
+          "name": "storage.modifier.fantom",
+          "match": "\\b(abstract|const|final|internal|native|once|override|private|protected|public|readonly|static|virtual|volatile)\\b"
+        },
+        {
+          "name": "storage.modifier.global.fantom",
+          "match": "\\busing\\b"
+        },
+        {
+          "name": "storage.type.fantom",
+          "match": "\\b(class|mixin|enum|facet)\\b"
+        },
+        {
+          "name": "keyword.control.flow.fantom",
+          "match": "\\b(return|break|continue)\\b"
+        },
+        {
+          "name": "keyword.control.try-catch.fantom",
+          "match": "\\b(try|catch|finally|throw|assert)\\b"
+        },
+        {
+          "name": "keyword.control.loop.fantom",
+          "match": "\\b(for|while|do|foreach)\\b"
+        },
+        {
+          "name": "keyword.control.switch.fantom",
+          "match": "\\b(switch|case|default)\\b"
+        },
+        {
+          "name": "keyword.control.if-else.fantom",
+          "match": "\\b(if|else)\\b"
+        },
+        {
+          "name": "keyword.operator.named.fantom",
+          "match": "\\b(new|void|as)\\b"
+        },
+        {
+          "match": "(===?|!==?|<=>?|>=|<|>|\\bis(not)?\\b)",
+          "name": "keyword.operator.comparison.fantom"
+        },
+        {
+          "name": "keyword.operator.assignment.arithmetic.fantom",
+          "match": "([+*/%-]=)"
+        },
+        {
+          "name": "keyword.operator.assignment.fantom",
+          "match": ":?="
+        },
+        {
+          "name": "keyword.operator.increment-decrement.fantom",
+          "match": "\\-\\-|\\+\\+"
+        },
+        {
+          "name": "keyword.operator.arithmetic.fantom",
+          "match": "\\-|\\+|\\*|\\/|%"
+        },
+        {
+          "name": "keyword.operator.logical.fantom",
+          "match": "(!(?!=)|&&|\\|\\|)"
+        },
+        {
+          "name": "keyword.operator.elvis.fantom",
+          "match": "\\?\\:"
+        },
+        {
+          "name": "keyword.operator.trap.fantom",
+          "match": "\\->"
+        },
+        {
+          "name": "keyword.operator.safe-trap.fantom",
+          "match": "\\?\\->"
+        },
+        {
+          "name": "keyword.operator.call.fantom",
+          "match": "(?<=\\S)\\.(?=\\S)"
+        },
+        {
+          "name": "keyword.operator.safe-call.fantom",
+          "match": "(?<=\\S)\\?\\.(?=\\S)"
+        },
+        {
+          "name": "keyword.operator.range.fantom",
+          "match": "\\.\\.<?"
+        },
+        {
+          "name": "keyword.operator.address-of.fantom",
+          "match": "(?x)&"
+        },
+        {
+          "name": "punctuation.terminator.fantom",
+          "match": ";"
+        }
+      ]
+    },
+    "literal_language_variable": {
+      "patterns": [
+        {
+          "name": "variable.language.super.fantom",
+          "match": "(?<!\\.)\\b(super)\\b"
+        },
+        {
+          "name": "variable.language.this.fantom",
+          "match": "(?!\\.)\\b(this)\\b"
+        },
+        {
+          "name": "variable.language.it.fantom",
+          "match": "(?!\\.)\\b(it)(?=\\.)"
+        }
+      ]
+    },
+    "literal_string": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.fantom",
+          "begin": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.fantom"
+            }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.fantom"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#escaped_unicode_char"
+            },
+            {
+              "include": "#escaped_char"
+            },
+            {
+              "include": "#interpolation"
+            }
+          ]
+        }
+      ]
+    },
+    "literal_uri": {
+      "patterns": [
+        {
+          "name": "string.quoted.other.uri.fantom",
+          "begin": "\\`",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.uri.begin.fantom"
+            }
+          },
+          "end": "\\`",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.uri.end.fantom"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#escaped_unicode_char"
+            },
+            {
+              "include": "#escaped_char"
+            },
+            {
+              "include": "#interpolation"
+            }
+          ]
+        }
+      ]
+    },
+    "escaped_unicode_char": {
+      "patterns": [
+        {
+          "name": "constant.character.unicode.fantom",
+          "match": "\\\\u[0-9A-Fa-f]{4}"
+        }
+      ]
+    },
+    "escaped_char": {
+      "patterns": [
+        {
+          "name": "constant.character.escapes.fantom",
+          "match": "\\\\[bfnrt\"'`$\\\\]"
+        }
+      ]
+    },
+    "interpolation": {
+      "patterns": [
+        {
+          "name": "variable.other.interpolated.fantom",
+          "match": "(?x)\\$(\\{.*?\\}|([A-Za-z_][_\\w]*\\.?)+)"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.fantom"
+}
